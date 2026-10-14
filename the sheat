@@ -1,0 +1,179 @@
+//printif
+package main
+
+func PrintIf(str string) string {
+	if str == "" || len(str) >= 3 {
+		return "G\n"
+	}
+	return "Invalid Input\n"
+}
+//printifnot
+package main
+
+func PrintIfNot(str string) string {
+	if len(str) < 3 {
+		return "G\n"
+	}
+	return "Invalid Input\n"
+}
+//checknumber
+package main
+
+func CheckNumber(arg string) bool {
+	for _, r := range arg {
+		if r >= '0' && r <= '9' {
+			return true
+		}
+	}
+	return false
+}
+//countalpha
+package main
+
+func CountAlpha(s string) int {
+	count := 0
+	for _, r := range s {
+		if (r >= 'a' && r <= 'z') || (r >= 'A' && r <= 'Z') {
+			count++
+		}
+	}
+	return count
+}
+//countchar
+package main
+
+func CountChar(str string, c rune) int {
+	count := 0
+	for _, r := range str {
+		if r == c {
+			count++
+		}
+	}
+	return count
+}
+//rectperimeter
+package main
+
+func RectPerimeter(w, h int) int {
+	if w < 0 || h < 0 {
+		return -1
+	}
+	return 2 * (w + h)
+}
+//retainfirsthalf
+package main
+
+func RetainFirstHalf(str string) string {
+	if len(str) <= 1 {
+		return str
+	}
+	return str[:len(str)/2]
+}
+//repeatalpha
+package main
+
+func RepeatAlpha(s string) string {
+	result := ""
+
+	for _, r := range s {
+		if r >= 'a' && r <= 'z' {
+			for i := 0; i < int(r-'a'+1); i++ {
+				result += string(r)
+			}
+		} else if r >= 'A' && r <= 'Z' {
+			for i := 0; i < int(r-'A'+1); i++ {
+				result += string(r)
+			}
+		} else {
+			result += string(r)
+		}
+	}
+
+	return result
+}
+//lastword
+package main
+
+func LastWord(s string) string {
+	word := ""
+	for i := len(s) - 1; i >= 0; i-- {
+		if s[i] != ' ' {
+			word = string(s[i]) + word
+		} else if word != "" {
+			break
+		}
+	}
+	if word != "" {
+		return word + "\n"
+	}
+	return "\n"
+}
+//printalpahbet
+package main
+
+import "github.com/01-edu/z01"
+
+func main() {
+	for c := 'a'; c <= 'z'; c++ {
+		z01.PrintRune(c)
+	}
+	z01.PrintRune('\n')
+}
+//printreverse
+package main
+
+import "github.com/01-edu/z01"
+
+func main() {
+	for c := 'z'; c >= 'a'; c-- {
+		z01.PrintRune(c)
+	}
+	z01.PrintRune('\n')
+}
+//pritntdigits
+package main
+
+import "github.com/01-edu/z01"
+
+func main() {
+	for c := '0'; c <= '9'; c++ {
+		z01.PrintRune(c)
+	}
+	z01.PrintRune('\n')
+}
+//isnegative
+package piscine
+
+import "github.com/01-edu/z01"
+
+func IsNegative(nb int) {
+	if nb < 0 {
+		z01.PrintRune('T')
+	} else {
+		z01.PrintRune('F')
+	}
+	z01.PrintRune('\n')
+}
+//printcomb
+package piscine
+
+import "github.com/01-edu/z01"
+
+func PrintComb() {
+	for i := '0'; i <= '7'; i++ {
+		for j := i + 1; j <= '8'; j++ {
+			for k := j + 1; k <= '9'; k++ {
+				z01.PrintRune(i)
+				z01.PrintRune(j)
+				z01.PrintRune(k)
+
+				if i != '7' || j != '8' || k != '9' {
+					z01.PrintRune(',')
+					z01.PrintRune(' ')
+				}
+			}
+		}
+	}
+	z01.PrintRune('\n')
+}
+//
