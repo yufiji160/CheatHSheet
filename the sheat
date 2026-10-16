@@ -176,4 +176,160 @@ func PrintComb() {
 	}
 	z01.PrintRune('\n')
 }
-//
+//cameltosnake
+package main
+
+import (
+	"fmt"
+)
+
+func CamelToSnakeCase(s string) string {
+	if s == "" {
+		return ""
+	}
+
+	runes := []rune(s)
+	length := len(runes)
+
+	for _, r := range runes {
+		if !((r >= 'a' && r <= 'z') || (r >= 'A' && r <= 'Z')) {
+			return s
+		}
+	}
+
+	if runes[length-1] >= 'A' && runes[length-1] <= 'Z' {
+		return s
+	}
+
+	for i := 0; i < length-1; i++ {
+		firstUpper := runes[i] >= 'A' && runes[i] <= 'Z'
+		secondUpper := runes[i+1] >= 'A' && runes[i+1] <= 'Z'
+		if firstUpper && secondUpper {
+			return s
+		}
+	}
+
+	var result []rune
+	for i := 0; i < length; i++ {
+		if i > 0 && runes[i] >= 'A' && runes[i] <= 'Z' {
+			result = append(result, '_')
+		}
+		result = append(result, runes[i])
+	}
+
+	return string(result)
+}
+//digitlen
+package main
+import (
+	"fmt"
+)
+func DigitLen(n, base int) int {
+	if base < 2 || base > 36 {
+		return -1
+	}
+	if n == 0 {
+		return 1
+	}
+	if n < 0 {
+		n = -n
+	}
+	count := 0
+	for n > 0 {
+		n = n / base
+		count++
+	}
+	return count
+}
+//firstword
+package main
+
+func FirstWord(s string) string {
+	i := 0
+	for i < len(s) && s[i] == ' ' {
+		i++
+	}
+	start := i
+	for i < len(s) && s[i] != ' ' {
+		i++
+	}
+	return s[start:i] + "\n"
+}
+//fishandchips
+package main
+
+func FishAndChips(n int) string {
+	if n < 0 {
+		return "error: number is negative"
+	}
+	if n%2 == 0 && n%3 == 0 {
+		return "fish and chips"
+	} else if n%2 == 0 {
+		return "fish"
+	} else if n%3 == 0 {
+		return "chips"
+	}
+	return "error: non divisible"
+}
+//gcd
+package main
+
+func Gcd(a, b uint) uint {
+	if a == 0 || b == 0 {
+		return 0
+	}
+	for b != 0 {
+		a, b = b, a%b
+	}
+	return a
+}
+//hashcode
+package main
+
+func HashCode(dec string) string {
+	n := len(dec)
+	res := make([]byte, n)
+	for i := 0; i < n; i++ {
+		hashed := (int(dec[i]) + n) % 127
+		if hashed < 32 {
+			hashed += 33
+		}
+		res[i] = byte(hashed)
+	}
+	return string(res)
+}
+//searchreplace
+package main
+
+import (
+	"fmt"
+	"os"
+	"strings"
+)
+
+func main() {
+	if len(os.Args) != 4 {
+		return
+	}
+
+	s := os.Args[1]
+	old := os.Args[2]
+	new := os.Args[3]
+
+	result := strings.ReplaceAll(s, old, new)
+	fmt.Println(result)
+}
+//displayz
+package main
+
+import "fmt"
+
+func DisplayZ(s string) {
+	for _, c := range s {
+		if c == 'z' {
+			fmt.Println("z")
+			return
+		}
+	}
+	fmt.Println("z")
+}
