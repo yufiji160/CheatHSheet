@@ -333,3 +333,302 @@ func DisplayZ(s string) {
 	}
 	fmt.Println("z")
 }
+//expandstr
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	if len(os.Args) != 2 {
+		return
+	}
+
+	s := os.Args[1]
+	space := true
+	found := false
+
+	for i := 0; i < len(s); i++ {
+		if s[i] == ' ' || s[i] == '\t' {
+			space = true
+		} else {
+			if space && found {
+				fmt.Print("   ")
+			}
+			fmt.Printf("%c", s[i])
+			space = false
+			found = true
+		}
+	}
+	if found {
+		fmt.Println()
+	}
+}
+//cleanstr
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	if len(os.Args) != 2 {
+		fmt.Println()
+		return
+	}
+
+	s := os.Args[1]
+	space := true
+
+	for i := 0; i < len(s); i++ {
+		if s[i] == ' ' || s[i] == '\t' {
+			space = true
+		} else {
+			if space && i != 0 {
+				fmt.Print(" ")
+			}
+			fmt.Printf("%c", s[i])
+			space = false
+		}
+	}
+
+	fmt.Println()
+}
+//findprevprime
+func isPrime(n int) bool {
+	if n < 2 {
+		return false
+	}
+	for i := 2; i*i <= n; i++ {
+		if n%i == 0 {
+			return false
+		}
+	}
+	return true
+}
+
+func FindPrevPrime(nb int) int {
+	for i := nb; i >= 2; i-- {
+		if isPrime(i) {
+			return i
+		}
+	}
+	return 0
+}
+//fromto
+package main
+
+import (
+	"fmt"
+)
+
+func FromTo(from int, to int) string {
+	if from < 0 || from > 99 || to < 0 || to > 99 {
+		return "Invalid\n"
+	}
+
+	var result string
+	step := 1
+	if from > to {
+		step = -1
+	}
+
+	for i := from; ; i += step {
+		if i < 10 {
+			result += fmt.Sprintf("0%d", i)
+		} else {
+			result += fmt.Sprintf("%d", i)
+		}
+
+		if i == to {
+			break
+		}
+
+		result += ", "
+	}
+
+	return result + "\n"
+}
+//iscapitalized
+package piscine
+
+func IsCapitalized(s string) bool {
+	if s == "" {
+		return false
+	}
+
+	start := true
+
+	for i := 0; i < len(s); i++ {
+		c := s[i]
+
+		if c == ' ' || c == '\t' || c == '\n' {
+			start = true
+			continue
+		}
+
+		if start {
+			if c >= 'a' && c <= 'z' {
+				return false
+			}
+			start = false
+		}
+	}
+
+	return true
+}
+//itoa
+package piscine
+
+func Itoa(n int) string {
+	if n == 0 {
+		return "0"
+	}
+
+	result := ""
+	negative := false
+
+	if n < 0 {
+		negative = true
+	}
+
+	for n != 0 {
+		digit := n % 10
+
+		if digit < 0 {
+			digit = -digit
+		}
+
+		result = string(rune(digit+'0')) + result
+		n /= 10
+	}
+
+	if negative {
+		result = "-" + result
+	}
+
+	return result
+}
+//printmemory
+package main
+
+import (
+	"fmt"
+)
+
+func PrintMemory(arr [10]byte) {
+	for i := 0; i < len(arr); i += 4 {
+		end := i + 4
+		if end > len(arr) {
+			end = len(arr)
+		}
+		for j := i; j < end; j++ {
+			if j > i {
+				fmt.Print(" ")
+			}
+			fmt.Printf("%02x", arr[j])
+		}
+		fmt.Println()
+	}
+
+	for _, b := range arr {
+		if b >= 32 && b <= 126 {
+			fmt.Printf("%c", b)
+		} else {
+			fmt.Print(".")
+		}
+	}
+	fmt.Println()
+}
+//printrevcomb
+package main
+
+import "github.com/01-edu/z01"
+
+func main() {
+	for a := 9; a >= 0; a-- {
+		for b := 9; b >= 0; b-- {
+			for c := 9; c >= 0; c-- {
+				if a > b && b > c {
+					z01.PrintRune(rune(a + '0'))
+					z01.PrintRune(rune(b + '0'))
+					z01.PrintRune(rune(c + '0'))
+
+					if a != 2 || b != 1 || c != 0 {
+						z01.PrintRune(',')
+						z01.PrintRune(' ')
+					}
+				}
+			}
+		}
+	}
+	z01.PrintRune('\n')
+}
+//thirdtimeisacharm
+package piscine
+
+func ThirdTimeIsACharm(str string) string {
+	result := ""
+
+	for i := 2; i < len(str); i += 3 {
+		result += string(str[i])
+	}
+
+	return result + "\n"
+}
+//weareunique
+func WeAreUnique(str1, str2 string) int {
+	if str1 == "" && str2 == "" {
+		return -1
+	}
+
+	set1 := make(map[rune]bool)
+	for _, r := range str1 {
+		set1[r] = true
+	}
+
+	set2 := make(map[rune]bool)
+	for _, r := range str2 {
+		set2[r] = true
+	}
+
+	count := 0
+	for r := range set1 {
+		if !set2[r] {
+			count++
+		}
+	}
+	for r := range set2 {
+		if !set1[r] {
+			count++
+		}
+	}
+
+	return count
+}
+//zipstring
+import (
+	"fmt"
+)
+
+func ZipString(s string) string {
+	if s == "" {
+		return ""
+	}
+
+	var result string
+	count := 1
+	for i := 0; i < len(s); i++ {
+		if i+1 < len(s) && s[i] == s[i+1] {
+			count++
+		} else {
+			result += fmt.Sprintf("%d%c", count, s[i])
+			count = 1
+		}
+	}
+	return result
+}
+//
