@@ -515,9 +515,7 @@ func Itoa(n int) string {
 //printmemory
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 func PrintMemory(arr [10]byte) {
 	for i := 0; i < len(arr); i += 4 {
@@ -526,14 +524,13 @@ func PrintMemory(arr [10]byte) {
 			end = len(arr)
 		}
 		for j := i; j < end; j++ {
-			if j > i {
+			fmt.Printf("%02x", arr[j])
+			if j < end-1 {
 				fmt.Print(" ")
 			}
-			fmt.Printf("%02x", arr[j])
 		}
 		fmt.Println()
 	}
-
 	for _, b := range arr {
 		if b >= 32 && b <= 126 {
 			fmt.Printf("%c", b)
