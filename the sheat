@@ -1004,4 +1004,279 @@ func main() {
 		fmt.Println(s1)
 	}
 }
+//fifthandskip
+package piscine
+
+func FifthAndSkip(str string) string {
+	if len(str) == 0 {
+		return "\n"
+	}
+	result := ""
+	count := 0
+
+	for _, char := range str {
+		if char == ' ' {
+			continue
+		}
+
+		count++
+		if count%6 == 0 {
+			continue
+		}
+
+		if count > 1 && (count-1)%5 == 0 {
+			result += " "
+		}
+
+		result += string(char)
+	}
+	if count < 5 {
+		return "Invalid Input\n"
+	}
+	return result + "\n"
+}
+//notdecimal
+package piscine
+import "strconv"
+func NotDecimal(dec string) string {
+	if dec == "" {
+		return "\n"
+	}
+	num, err := strconv.ParseFloat(dec, 64)
+	if err != nil {
+		return dec + "\n"
+	}
+	dot := -1
+	for i, char := range dec {
+		if char == '.' {
+			dot = i
+			break
+		}
+	}
+	if dot == -1 || dec[dot+1:] == "0" {
+		return dec + "\n"
+	}
+	result := dec[:dot] + dec[dot+1:]
+	sign := ""
+	if result[0] == '-' {
+		sign = "-"
+		result = result[1:]
+	}
+	for len(result) > 1 && result[0] == '0' {
+		result = result[1:]
+	}
+	_ = num
+	return sign + result + "\n"
+}
+//revconcatalternate
+package piscine
+func RevConcatAlternate(slice1, slice2 []int) []int {
+	result := []int{}
+	i := len(slice1) - 1
+	j := len(slice2) - 1
+
+	for i >= 0 || j >= 0 {
+		if i >= j && i >= 0 {
+			result = append(result, slice1[i])
+			i--
+		}
+		if j > i && j >= 0 {
+			result = append(result, slice2[j])
+			j--
+		}
+	}
+	return result
+}
+//slice
+package piscine
+
+func Slice(a []string, nbrs ...int) []string {
+	if len(nbrs) == 0 {
+		return a
+	}
+
+	start := nbrs[0]
+	if start < 0 {
+		start = len(a) + start
+	}
+
+	if start < 0 {
+		start = 0
+	}
+	if start > len(a) {
+		start = len(a)
+	}
+
+	end := len(a)
+	if len(nbrs) >= 2 {
+		end = nbrs[1]
+		if end < 0 {
+			end = len(a) + end
+		}
+		if end < 0 {
+			end = 0
+		}
+		if end > len(a) {
+			end = len(a)
+		}
+	}
+
+	if start > end {
+		return nil
+	}
+
+	return a[start:end]
+}
+//findpairs
+package main
+import (
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+func main() {
+	if len(os.Args) != 3 {
+		fmt.Println("Invalid input.")
+		return
+	}
+	arrStr := os.Args[1]
+	targetStr := os.Args[2]
+
+	target, err := strconv.Atoi(targetStr)
+	if err != nil {
+		fmt.Println("Invalid target sum.")
+		return
+	}
+	arrStr = strings.TrimSpace(arrStr)
+	if !strings.HasPrefix(arrStr, "[") || !strings.HasSuffix(arrStr, "]") {
+		fmt.Println("Invalid input.")
+		return
+	}
+	inner := arrStr[1 : len(arrStr)-1]
+	inner = strings.TrimSpace(inner)
+
+	var arr []int
+	if inner != "" {
+		parts := strings.Split(inner, ",")
+		for _, p := range parts {
+			p = strings.TrimSpace(p)
+			val, err := strconv.Atoi(p)
+			if err != nil {
+				fmt.Printf("Invalid number: %s\n", p)
+				return
+			}
+			arr = append(arr, val)
+		}
+	}
+	var pairs [][]int
+	used := make([]bool, len(arr))
+	for i := 0; i < len(arr); i++ {
+		if used[i] {
+			continue
+		}
+		for j := i + 1; j < len(arr); j++ {
+			if used[j] {
+				continue
+			}
+			if arr[i]+arr[j] == target {
+				used[i] = true
+				used[j] = true
+				pairs = append(pairs, []int{i, j})
+				break
+			}
+		}
+	}
+	if len(pairs) == 0 {
+		fmt.Println("No pairs found.")
+	} else {
+		fmt.Printf("Pairs with sum %d: %v\n", target, pairs)
+	}
+}
+//revwstr
+ package main
+
+        import (
+        "os"
+        "strings"
+
+        "github.com/01-edu/z01"
+        )
+
+        func main() {
+        if len(os.Args) != 2 {
+        return
+        }
+        words := strings.Split(os.Args[1], " ")
+
+        for i := len(words) - 1; i >= 0; i-- {
+        for _, r := range words[i] {
+        z01.PrintRune(r)
+        }
+
+        if i > 0 {
+        z01.PrintRune(' ')
+        }
+        }
+        if os.Args[1] != "" {
+        z01.PrintRune('\n')
+        }
+        }
+//rostring
+package main
+
+        import (
+        "os"
+        "strings"
+
+        "github.com/01-edu/z01"
+        )
+
+        func main() {
+        if len(os.Args) != 2 {
+        z01.PrintRune('\n')
+        return
+        }
+
+        words := strings.Fields(os.Args[1])
+
+        if len(words) == 0 {
+        z01.PrintRune('\n')
+        return
+        }
+
+        for i := 1; i < len(words); i++ {
+        for _, r := range words[i] {
+        z01.PrintRune(r)
+        }
+        z01.PrintRune(' ')
+        }
+
+        for _, r := range words[0] {
+        z01.PrintRune(r)
+        }
+
+        z01.PrintRune('\n')
+        }
+//wordflip
+package piscine
+
+        import "strings"
+
+        func WordFlip(str string) string {
+        words := strings.Fields(str)
+
+        if len(words) == 0 {
+        if str == "" {
+        return "Invalid Output\n"
+        }
+        return "\n"
+        }
+
+        for i, j := 0, len(words)-1; i < j; i, j = i+1, j-1 {
+        words[i], words[j] = words[j], words[i]
+        }
+
+        return strings.Join(words, " ") + "\n"
+        }
 //
