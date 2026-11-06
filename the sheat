@@ -1279,4 +1279,59 @@ package piscine
 
         return strings.Join(words, " ") + "\n"
         }
-//
+//revwstr
+package main
+import (
+	"fmt"
+	"os"
+	"strings"
+)
+func main() {
+	if len(os.Args) != 2 {
+		return
+	}
+	words := strings.Split(os.Args[1], " ")
+	for i := len(words) - 1; i >= 0; i-- {
+		if i < len(words)-1 {
+			fmt.Print(" ")
+		}
+		fmt.Print(words[i])
+	}
+	fmt.Println()
+}
+//rostring
+package main
+import (
+	"fmt"
+	"os"
+	"strings"
+)
+func main() {
+	if len(os.Args) != 2 {
+		fmt.Println()
+		return
+	}
+	fields := strings.Fields(os.Args[1])
+	if len(fields) == 0 {
+		fmt.Println()
+		return
+	}
+	rotated := append(fields[1:], fields[0])
+	fmt.Println(strings.Join(rotated, " "))
+}
+//wordflip
+package piscine
+import (
+	"strings"
+)
+func WordFlip(str string) string {
+	fields := strings.Fields(str)
+	if len(fields) == 0 {
+		return "Invalid Output\n"
+	}
+
+	for i, j := 0, len(fields)-1; i < j; i, j = i+1, j-1 {
+		fields[i], fields[j] = fields[j], fields[i]
+	}
+	return strings.Join(fields, " ") + "\n"
+}
